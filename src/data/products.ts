@@ -1280,6 +1280,90 @@ export const products: Product[] = [
     ],
   },
 
+  {
+    id: 34,
+    name: "Sofa vải xám 2 chỗ",
+    price: 2700000,
+    inStock: true,
+    category: "Sofa",
+    subcategory: "Sofa 2 chỗ",
+    rooms: ["Phòng khách", "Phòng làm việc"],
+    images: getGallery("Sofa_4"),
+    hoverImage: getHoverImage("Sofa_4"),
+    model3D: getModel("Sofa_4.glb"),
+    description:
+      "Sofa vải dệt màu xám trung tính, ba gối tựa lưng rời, hai đệm ngồi và tay vịn vuông, chân gỗ thấp.",
+    detailDescription:
+      "Mẫu sofa có thiết kế cân đối với phần thân bọc vải màu xám, ba gối tựa lưng lớn, hai đệm ngồi riêng biệt và tay vịn dày bo nhẹ ở góc. Chân ghế thấp màu nâu gỗ tạo cảm giác ấm áp, phù hợp phòng khách tối giản hoặc khu vực tiếp khách tại phòng làm việc.",
+    specifications: {
+      "Chất liệu": "Vải dệt và chân gỗ",
+      "Phong cách": "Hiện đại, tối giản",
+      "Màu sắc": "Xám trung tính, nâu gỗ",
+      "Kiểu dáng": "Sofa thẳng, 2 đệm ngồi, 3 gối tựa",
+    },
+    sizes: [
+      createSize("160 cm", 160, 85, 85, 2700000),
+      createSize("180 cm", 180, 88, 85, 3400000),
+      createSize("200 cm", 200, 90, 85, 4200000),
+    ],
+  },
+
+  {
+    id: 35,
+    name: "Sofa da đen tối giản",
+    price: 4200000,
+    inStock: true,
+    category: "Sofa",
+    subcategory: "Sofa 2 chỗ",
+    rooms: ["Phòng khách", "Phòng làm việc"],
+    images: getGallery("Sofa_5"),
+    hoverImage: getHoverImage("Sofa_5"),
+    model3D: getModel("Sofa_5.glb"),
+    description:
+      "Sofa da đen với hai tấm lưng tựa vuông, mặt ngồi dài liền khối, tay vịn lớn và hai gối trang trí xám.",
+    detailDescription:
+      "Thiết kế sofa hai chỗ nổi bật với bề mặt da đen, hai khối tựa lưng vuông rõ nét và đệm ngồi liền mang đường may ngang tinh tế. Hai gối trang trí xám làm mềm các đường nét vuông vức, phù hợp phòng khách hiện đại, tối giản hoặc không gian tiếp khách chuyên nghiệp.",
+    specifications: {
+      "Chất liệu": "Bọc da, khung ghế",
+      "Phong cách": "Hiện đại, tối giản",
+      "Màu sắc": "Đen, gối xám",
+      "Kiểu dáng": "Sofa thẳng, hai tựa lưng",
+    },
+    sizes: [
+      createSize("170 cm", 170, 88, 85, 4200000),
+      createSize("190 cm", 190, 90, 85, 4800000),
+      createSize("210 cm", 210, 92, 85, 5400000),
+    ],
+  },
+
+  {
+    id: 36,
+    name: "Sofa góc chữ L xanh xám",
+    price: 1900000,
+    inStock: true,
+    category: "Sofa",
+    subcategory: "Sofa góc",
+    rooms: ["Phòng khách"],
+    images: getGallery("Sofa_6"),
+    hoverImage: getHoverImage("Sofa_6"),
+    model3D: getModel("Sofa_6.glb"),
+    description:
+      "Sofa góc chữ L bọc vải xanh xám, ghế dài chaise phía trái khi nhìn chính diện, ba đệm tựa lưng và chân gỗ sáng.",
+    detailDescription:
+      "Sofa góc chữ L gồm một phần ghế dài duỗi chân phía trái, ba vị trí ngồi rộng với tựa lưng phân tầng, tay vịn bo mềm và khung chân gỗ sáng màu thấp. Lớp vải xanh xám dịu mắt thích hợp cho phòng khách hiện đại, Scandinavian hoặc không gian sinh hoạt chung có diện tích rộng.",
+    specifications: {
+      "Chất liệu": "Vải dệt và chân gỗ",
+      "Phong cách": "Hiện đại, Scandinavian",
+      "Màu sắc": "Xanh xám, nâu gỗ sáng",
+      "Kiểu dáng": "Sofa chữ L, chaise bên trái nhìn chính diện",
+    },
+    sizes: [
+      createSize("240 cm", 240, 160, 86, 1900000),
+      createSize("270 cm", 270, 170, 86, 2100000),
+      createSize("300 cm", 300, 180, 86, 2300000),
+    ],
+  },
+
 ];
 
 // =====================================================
