@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AutoUpdate from "./components/common/AutoUpdate";
 
 import MainLayout from "./components/layout/MainLayout";
 import ScrollToTop from "./components/common/ScrollToTop";
@@ -15,8 +16,8 @@ import About from "./pages/About/About";
 function App() {
   return (
     <BrowserRouter basename="/Nesta">
-      {/* Tự động cuộn lên đầu khi chuyển trang */}
       <ScrollToTop />
+      <AutoUpdate />
 
       <Routes>
         <Route element={<MainLayout />}>
