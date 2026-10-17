@@ -3,6 +3,24 @@ import { useSearchParams } from "react-router-dom";
 import ProductGrid from "../../components/product/ProductGrid";
 import { products } from "../../data/products";
 
+// Mỗi sản phẩm có thể xuất hiện ở nhiều không gian khác nhau.
+type ProductRoom =
+  | "Phòng khách"
+  | "Phòng ngủ"
+  | "Phòng ăn"
+  | "Phòng làm việc";
+
+const ROOM_OPTIONS: ProductRoom[] = [
+  "Phòng khách",
+  "Phòng ngủ",
+  "Phòng ăn",
+  "Phòng làm việc",
+];
+
+type RoomAssignableProduct = (typeof products)[number] & {
+  rooms?: readonly ProductRoom[];
+};
+
 function normalizeText(value: string): string {
   return value
     .normalize("NFD")
@@ -27,6 +45,7 @@ function Products() {
   // =========================================================
 
   const categoryParam = searchParams.get("category");
+  const roomParam = searchParams.get("room");
   const subcategoryParam = searchParams.get("subcategory");
   const searchParam = searchParams.get("search") || "";
 
@@ -93,6 +112,14 @@ function Products() {
   });
 
   // =========================================================
+  // CURRENT ROOM
+  // =========================================================
+
+  const currentRoom = ROOM_OPTIONS.find(function (room) {
+    return normalizeText(room) === normalizeText(roomParam || "");
+  });
+
+  // =========================================================
   // FILTER PRODUCTS
   // =========================================================
 
@@ -103,6 +130,21 @@ function Products() {
   const maxPriceNumber = maxPriceParam ? Number(maxPriceParam) : null;
 
   const filteredProducts = products.filter(function (product) {
+    // =========================================================
+    // ROOM - Kết hợp với mọi bộ lọc khác
+    // =========================================================
+
+    if (roomParam) {
+      // Thuộc tính `rooms` sẽ được gán cho từng sản phẩm trong products.ts.
+      // Cách đọc này vẫn biên dịch được khi Product chưa bổ sung rooms.
+      const productRooms = (product as RoomAssignableProduct).rooms || [];
+      const belongsToRoom = productRooms.some(function (room) {
+        return normalizeText(room) === normalizeText(roomParam);
+      });
+
+      if (!belongsToRoom) return false;
+    }
+
     // =========================================================
     // CATEGORY
     // =========================================================
@@ -207,6 +249,8 @@ function Products() {
     pageTitle = currentSubcategory.toUpperCase();
   } else if (currentCategory) {
     pageTitle = currentCategory.toUpperCase();
+  } else if (currentRoom) {
+    pageTitle = currentRoom.toUpperCase();
   }
 
   // =========================================================
@@ -214,6 +258,7 @@ function Products() {
   // =========================================================
 
   const hasFilter =
+    Boolean(roomParam) ||
     Boolean(categoryParam) ||
     Boolean(subcategoryParam) ||
     Boolean(searchParam) ||
@@ -248,6 +293,10 @@ function Products() {
     const params = new URLSearchParams();
 
     params.set("category", category);
+
+    if (roomParam) {
+      params.set("room", roomParam);
+    }
 
     if (searchParam) {
       params.set("search", searchParam);
@@ -337,6 +386,11 @@ function Products() {
   function handleShowAllProducts() {
     const params = new URLSearchParams();
 
+    // "Tất cả sản phẩm" ở mục Danh mục vẫn giữ lọc phòng đang chọn.
+    if (roomParam) {
+      params.set("room", roomParam);
+    }
+
     if (searchParam) {
       params.set("search", searchParam);
     }
@@ -350,6 +404,10 @@ function Products() {
 
   function handleShowAllCategoryProducts() {
     const params = new URLSearchParams();
+
+    if (roomParam) {
+      params.set("room", roomParam);
+    }
 
     if (currentCategory) {
       params.set("category", currentCategory);
@@ -490,6 +548,48 @@ function Products() {
                       </span>
 
                       {category}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* =================================================
+                KHÔNG GIAN PHÒNG
+            ================================================== */}
+
+            <div className="border-b border-[#DDD5CD] py-6">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#3B2F25]">
+                Theo không gian
+              </p>
+
+              <div className="space-y-3">
+                {ROOM_OPTIONS.map(function (room) {
+                  const active =
+                    normalizeText(room) === normalizeText(roomParam || "");
+
+                  return (
+                    <button
+                      key={room}
+                      type="button"
+                      onClick={() => updateParams({ room: active ? null : room })}
+                      aria-pressed={active}
+                      className={`flex w-full items-center gap-2 text-left text-sm transition-colors ${
+                        active
+                          ? "font-semibold text-[#3B2F25]"
+                          : "text-[#756D66] hover:text-[#3B2F25]"
+                      }`}
+                    >
+                      <span
+                        className={`flex h-4 w-4 shrink-0 items-center justify-center border ${
+                          active
+                            ? "border-[#3B2F25] bg-[#3B2F25]"
+                            : "border-[#AAA098]"
+                        }`}
+                      >
+                        {active && <span className="h-1.5 w-1.5 bg-white" />}
+                      </span>
+                      {room}
                     </button>
                   );
                 })}
@@ -655,6 +755,17 @@ function Products() {
               </p>
 
               <div className="flex flex-wrap items-center gap-3">
+                {roomParam && (
+                  <button
+                    type="button"
+                    onClick={() => updateParams({ room: null })}
+                    className="rounded-full border border-[#CFC6BE] px-3 py-1 text-xs text-[#3B2F25] transition-colors hover:bg-[#ECE6E0]"
+                    title="Xóa bộ lọc không gian"
+                  >
+                    {currentRoom || roomParam} ×
+                  </button>
+                )}
+
                 {categoryParam && (
                   <span className="text-xs text-[#756D66]">
                     {currentCategory || categoryParam}
