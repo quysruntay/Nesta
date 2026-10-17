@@ -61,6 +61,16 @@ export const productCategories = [
 
 export type ProductCategory = (typeof productCategories)[number];
 
+// Một sản phẩm có thể phù hợp với nhiều không gian phòng.
+export const productRooms = [
+  "Phòng khách",
+  "Phòng ngủ",
+  "Phòng ăn",
+  "Phòng làm việc",
+] as const;
+
+export type ProductRoom = (typeof productRooms)[number];
+
 // =====================================================
 // PRODUCT TYPE
 // =====================================================
@@ -87,6 +97,9 @@ export type Product = {
 
   category: ProductCategory;
   subcategory: string;
+
+  // Bộ lọc "THEO KHÔNG GIAN" - hỗ trợ nhiều phòng cho một sản phẩm.
+  rooms?: ProductRoom[];
 
   images: string[];
 
@@ -205,6 +218,7 @@ export const products: Product[] = [
 
     category: "Giường",
     subcategory: "Giường ngủ",
+    rooms: ["Phòng ngủ"],
 
     images: getGallery("Bed_1"),
     hoverImage: getHoverImage("Bed_1"),
@@ -240,6 +254,7 @@ export const products: Product[] = [
 
     category: "Giường",
     subcategory: "Giường ngủ",
+    rooms: ["Phòng ngủ"],
 
     images: getGallery("Bed_2"),
     hoverImage: getHoverImage("Bed_2"),
@@ -270,6 +285,7 @@ export const products: Product[] = [
 
   category: "Giường",
   subcategory: "Giường đôi",
+  rooms: ["Phòng ngủ"],
 
   images: getGallery("Bed_3"),
   hoverImage: getHoverImage("Bed_3"),
@@ -302,6 +318,7 @@ export const products: Product[] = [
 
   category: "Sofa",
   subcategory: "Sofa phòng khách",
+  rooms: ["Phòng khách"],
 
   images: getGallery("Sofa_1"),
   hoverImage: getHoverImage("Sofa_1"),
@@ -336,6 +353,7 @@ export const products: Product[] = [
 
   category: "Sofa",
   subcategory: "Sofa phòng khách",
+  rooms: ["Phòng khách"],
 
   images: getGallery("Sofa_2"),
   hoverImage: getHoverImage("Sofa_2"),
@@ -370,6 +388,7 @@ export const products: Product[] = [
 
   category: "Sofa",
   subcategory: "Sofa phòng khách",
+  rooms: ["Phòng khách"],
 
   images: getGallery("Sofa_3"),
   hoverImage: getHoverImage("Sofa_3"),
@@ -411,6 +430,7 @@ export const products: Product[] = [
 
     category: "Ghế",
     subcategory: "Ghế ăn",
+    rooms: ["Phòng ăn", "Phòng khách", "Phòng làm việc"],
 
     // Giữ ảnh gốc; khi có Chair_1_1.jpg...Chair_1_5.jpg
     // có thể thay bằng getGallery("Chair_1") và getHoverImage("Chair_1").
@@ -447,6 +467,7 @@ export const products: Product[] = [
 
   category: "Bàn",
   subcategory: "Bàn làm việc",
+  rooms: ["Phòng làm việc", "Phòng ăn"],
 
   images: getGallery("Table_1"),
   hoverImage: getHoverImage("Table_1"),
@@ -481,6 +502,7 @@ export const products: Product[] = [
 
   category: "Bàn",
   subcategory: "Bàn trà",
+  rooms: ["Phòng khách"],
 
   images: getGallery("Table_2"),
   hoverImage: getHoverImage("Table_2"),
@@ -514,6 +536,7 @@ export const products: Product[] = [
 
   category: "Bàn",
   subcategory: "Bàn tròn",
+  rooms: ["Phòng khách", "Phòng ăn"],
 
   images: getGallery("Table_3"),
   hoverImage: getHoverImage("Table_3"),
@@ -547,6 +570,7 @@ export const products: Product[] = [
 
   category: "Tủ",
   subcategory: "Tủ quần áo",
+  rooms: ["Phòng ngủ"],
 
   images: getGallery("Closet_1"),
   hoverImage: getHoverImage("Closet_1"),
@@ -581,6 +605,7 @@ export const products: Product[] = [
 
   category: "Tủ",
   subcategory: "Tủ quần áo",
+  rooms: ["Phòng ngủ"],
 
   images: getGallery("Closet_2"),
   hoverImage: getHoverImage("Closet_2"),
@@ -615,6 +640,7 @@ export const products: Product[] = [
 
   category: "Tủ",
   subcategory: "Tủ quần áo",
+  rooms: ["Phòng ngủ"],
 
   images: getGallery("Closet_3"),
   hoverImage: getHoverImage("Closet_3"),
@@ -651,6 +677,7 @@ export const products: Product[] = [
 
   category: "Ghế",
   subcategory: "Ghế ăn",
+  rooms: ["Phòng ăn", "Phòng làm việc"],
 
   images: getGallery("Chair_1"),
   hoverImage: getHoverImage("Chair_1"),
@@ -693,6 +720,7 @@ export const products: Product[] = [
 
     category: "Ghế",
     subcategory: "Ghế thư giãn",
+    rooms: ["Phòng khách", "Phòng ngủ", "Phòng làm việc"],
 
     images: getGallery("Chair_2"),
     hoverImage: getHoverImage("Chair_2"),
@@ -725,6 +753,7 @@ export const products: Product[] = [
 
     category: "Ghế",
     subcategory: "Ghế thư giãn",
+    rooms: ["Phòng khách", "Phòng ngủ"],
 
     images: getGallery("Chair_3"),
     hoverImage: getHoverImage("Chair_3"),
@@ -761,6 +790,7 @@ export const products: Product[] = [
 
     category: "Đèn",
     subcategory: "Đèn bàn",
+    rooms: ["Phòng làm việc", "Phòng ngủ"],
 
     images: getGallery("Lamp_1"),
     hoverImage: getHoverImage("Lamp_1"),
@@ -793,6 +823,7 @@ export const products: Product[] = [
 
     category: "Đèn",
     subcategory: "Đèn bàn",
+    rooms: ["Phòng ngủ", "Phòng khách"],
 
     images: getGallery("Lamp_2"),
     hoverImage: getHoverImage("Lamp_2"),
@@ -825,6 +856,7 @@ export const products: Product[] = [
 
     category: "Đèn",
     subcategory: "Đèn tường",
+    rooms: ["Phòng ngủ", "Phòng khách"],
 
     images: getGallery("Lamp_3"),
     hoverImage: getHoverImage("Lamp_3"),
@@ -861,6 +893,7 @@ export const products: Product[] = [
 
     category: "Kệ",
     subcategory: "Kệ sách",
+    rooms: ["Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Shelf_1"),
     hoverImage: getHoverImage("Shelf_1"),
@@ -894,6 +927,7 @@ export const products: Product[] = [
 
     category: "Kệ",
     subcategory: "Kệ lưu trữ",
+    rooms: ["Phòng ăn", "Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Shelf_2"),
     hoverImage: getHoverImage("Shelf_2"),
@@ -927,6 +961,7 @@ export const products: Product[] = [
 
     category: "Kệ",
     subcategory: "Kệ trang trí",
+    rooms: ["Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Shelf_3"),
     hoverImage: getHoverImage("Shelf_3"),
@@ -963,6 +998,7 @@ export const products: Product[] = [
 
     category: "Gương",
     subcategory: "Gương để bàn",
+    rooms: ["Phòng ngủ"],
 
     images: getGallery("Mirror_1"),
     hoverImage: getHoverImage("Mirror_1"),
@@ -995,6 +1031,7 @@ export const products: Product[] = [
 
     category: "Gương",
     subcategory: "Bàn trang điểm có gương",
+    rooms: ["Phòng ngủ"],
 
     images: getGallery("Mirror_2"),
     hoverImage: getHoverImage("Mirror_2"),
@@ -1027,6 +1064,7 @@ export const products: Product[] = [
 
     category: "Gương",
     subcategory: "Gương treo tường",
+    rooms: ["Phòng ngủ", "Phòng khách"],
 
     images: getGallery("Mirror_3"),
     hoverImage: getHoverImage("Mirror_3"),
@@ -1063,6 +1101,7 @@ export const products: Product[] = [
 
     category: "Trang trí",
     subcategory: "Tranh trang trí",
+    rooms: ["Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Decor_1"),
     hoverImage: getHoverImage("Decor_1"),
@@ -1095,6 +1134,7 @@ export const products: Product[] = [
 
     category: "Trang trí",
     subcategory: "Tượng trang trí",
+    rooms: ["Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Decor_2"),
     hoverImage: getHoverImage("Decor_2"),
@@ -1127,6 +1167,7 @@ export const products: Product[] = [
 
     category: "Trang trí",
     subcategory: "Đồ trang trí cổ điển",
+    rooms: ["Phòng khách", "Phòng làm việc"],
 
     images: getGallery("Decor_3"),
     hoverImage: getHoverImage("Decor_3"),
@@ -1151,6 +1192,94 @@ export const products: Product[] = [
       createSize("80 cm", 80, 10, 80, 6200000),
     ],
   },
+
+  {
+    id: 31,
+    name: "Giường gỗ mộc Rustic",
+    price: 4200000,
+    category: "Giường",
+    subcategory: "Giường đơn",
+    rooms: ["Phòng ngủ"],
+
+    images: getGallery("Bed_4"),
+    hoverImage: getHoverImage("Bed_4"),
+    model3D: getModel("Bed_4.glb"),
+
+    description:
+      "Giường gỗ nâu trầm có bốn trụ vuông chắc chắn, đầu và cuối giường bằng gỗ, chăn họa tiết nâu cùng gối màu kem.",
+    detailDescription:
+      "Thiết kế Rustic mộc mạc với khung gỗ vân nâu sẫm, bốn chân trụ vuông cao và những tấm ván đầu, cuối giường liền khung. Phối cùng nệm sáng màu, gối kem và chăn dệt họa tiết nâu, thích hợp phòng ngủ ấm cúng theo phong cách tự nhiên.",
+    specifications: {
+      "Chất liệu": "Khung gỗ, nệm và vải dệt",
+      "Phong cách": "Rustic, mộc mạc",
+      "Màu sắc": "Nâu gỗ đậm, nâu dệt và kem",
+      "Kiểu dáng": "Giường có bốn trụ vuông",
+    },
+    sizes: [
+      createSize("1m0", 100, 200, 95, 4200000),
+      createSize("1m2", 120, 200, 95, 4800000),
+      createSize("1m4", 140, 200, 95, 5400000),
+    ],
+  },
+
+  {
+    id: 32,
+    name: "Bed Sagara",
+    price: 3800000,
+    category: "Giường",
+    subcategory: "Giường đôi",
+    rooms: ["Phòng ngủ"],
+
+    images: getGallery("Bed_5"),
+    hoverImage: getHoverImage("Bed_5"),
+    model3D: getModel("Bed_5.glb"),
+
+    description:
+      "Giường đôi hiện đại với đầu giường kéo dài vân gỗ xám sọc ngang, hai kệ nhỏ liền đầu giường, gối trắng và chăn xám nhạt.",
+    detailDescription:
+      "Bed Sagara có khung giường thấp màu nâu đen, đầu giường dạng tấm lớn vân gỗ xám trải rộng sang hai bên, kết hợp cặp kệ nổi mặt tối màu. Nệm và gối trắng phối chăn xám tạo vẻ tối giản, thanh lịch và phù hợp phòng ngủ hiện đại.",
+    specifications: {
+      "Chất liệu": "Khung gỗ, nệm và vải",
+      "Phong cách": "Hiện đại, tối giản",
+      "Màu sắc": "Xám vân gỗ, nâu đen và trắng",
+      "Kiểu dáng": "Giường thấp với kệ đầu giường tích hợp",
+    },
+    sizes: [
+      createSize("1m6", 160, 200, 95, 3800000),
+      createSize("1m8", 180, 200, 95, 4200000),
+      createSize("2m0", 200, 200, 95, 4800000),
+    ],
+  },
+
+  {
+    id: 33,
+    name: "Giường gỗ cổ điển đỏ rượu",
+    price: 8200000,
+    category: "Giường",
+    subcategory: "Giường gỗ cổ điển",
+    rooms: ["Phòng ngủ"],
+
+    images: getGallery("Bed_6"),
+    hoverImage: getHoverImage("Bed_6"),
+    model3D: getModel("Bed_6.glb"),
+
+    description:
+      "Giường gỗ nâu chạm khắc kiểu cổ điển, bốn trụ lớn, đầu giường vòm cong và chăn đỏ rượu nổi bật.",
+    detailDescription:
+      "Mẫu giường phong cách cổ điển mang tông gỗ nâu sẫm, đầu giường uốn vòm có đường nét trang trí và bốn trụ vuông với họa tiết chạm trên đỉnh. Chăn màu đỏ rượu cùng gối đỏ cam tạo điểm nhấn ấm áp cho phòng ngủ mang cảm hứng truyền thống.",
+    specifications: {
+      "Chất liệu": "Khung gỗ và vải phủ",
+      "Phong cách": "Cổ điển",
+      "Màu sắc": "Nâu gỗ đậm, đỏ rượu và đỏ cam",
+      "Kiểu dáng": "Đầu giường vòm, bốn trụ chạm trang trí",
+    },
+    sizes: [
+      createSize("1m2", 120, 200, 115, 8200000),
+      createSize("1m4", 140, 200, 115, 9400000),
+      createSize("1m6", 160, 200, 115, 10800000),
+    ],
+  },
+
 ];
 
 // =====================================================
